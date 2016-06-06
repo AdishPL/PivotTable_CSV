@@ -8,23 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		39C558FC1D05E95300F80DC1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 39C558FB1D05E95300F80DC1 /* main.m */; };
+		39C559051D05EF6F00F80DC1 /* example.csv in CopyFiles */ = {isa = PBXBuildFile; fileRef = 39C559021D05EA7700F80DC1 /* example.csv */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		39C558F61D05E95300F80DC1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				39C559051D05EF6F00F80DC1 /* example.csv in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		39C558F81D05E95300F80DC1 /* PivotTable_CSV */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PivotTable_CSV; sourceTree = BUILT_PRODUCTS_DIR; };
 		39C558FB1D05E95300F80DC1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		39C559021D05EA7700F80DC1 /* example.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,7 @@
 		39C558FA1D05E95300F80DC1 /* PivotTable_CSV */ = {
 			isa = PBXGroup;
 			children = (
+				39C559021D05EA7700F80DC1 /* example.csv */,
 				39C558FB1D05E95300F80DC1 /* main.m */,
 			);
 			path = PivotTable_CSV;

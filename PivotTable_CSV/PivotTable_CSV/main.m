@@ -10,8 +10,26 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
-    }
+        NSMutableArray *colA = [NSMutableArray array];
+        NSMutableArray *colB = [NSMutableArray array];
+        NSString* fileName = [[NSBundle mainBundle] pathForResource:@"example" ofType:@"csv"];
+        NSError *error;
+        NSString *fileContents = [NSString stringWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:&error];
+        
+        if (error) {
+            NSLog(@"Error reading file: %@", error.localizedDescription);
+        } else {
+        NSArray* rows = [fileContents componentsSeparatedByString:@"\n"];
+        for (NSString *row in rows){
+            NSArray* columns = [row componentsSeparatedByString:@";"];
+            [colA addObject:columns[0]];
+            [colB addObject:columns[1]];
+        }
+        
+        NSLog(@"ColA %@",colA);
+    
+        }
+        
     return 0;
+    }
 }
