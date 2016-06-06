@@ -56,7 +56,7 @@ int main(int argc, const char * argv[]) {
             
             int i = 0;
             
-            for (id key in dictionaryOfRelations) {
+            for (id key in [[dictionaryOfRelations allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
                 NSMutableDictionary *dictionaryOfValues = [dictionaryOfRelations objectForKey:key];
                 
                 for (id relation in dictionaryOfValues) {
@@ -79,7 +79,25 @@ int main(int argc, const char * argv[]) {
             }
             
             
+            NSMutableString *headString = [NSMutableString new];
+            for (id key in [[dictionaryOfRelations allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
+                [headString appendString:[NSString stringWithFormat:@"; %@",key]];
+            }
             
+            NSLog(@"%@",headString);
+            
+            for (id dictionary in [[summedDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)]) {
+                NSMutableString *lineString = [NSMutableString new];
+                [lineString appendString:[NSString stringWithFormat:@"%@",dictionary]];
+                for (id array in [summedDictionary objectForKey:dictionary]) {
+                    if (!(array == [NSNull null])) {
+                        [lineString appendString:[NSString stringWithFormat:@";%@",[[array allValues] objectAtIndex:0]]];
+                    } else {
+                        [lineString appendString:@";"];
+                    }
+                }
+                NSLog(@"%@",lineString);
+            }
             
             
         }
