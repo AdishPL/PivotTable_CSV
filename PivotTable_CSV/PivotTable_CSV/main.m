@@ -10,9 +10,6 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        NSMutableArray *colA = [NSMutableArray array];
-        NSMutableArray *colB = [NSMutableArray array];
-        
         NSMutableDictionary *dictionaryOfRelations = [NSMutableDictionary new];
         
         NSString* fileName = [[NSBundle mainBundle] pathForResource:@"example" ofType:@"csv"];
@@ -36,22 +33,6 @@ int main(int argc, const char * argv[]) {
                 }
                 
                 NSMutableDictionary *currentEntries = [dictionaryOfRelations objectForKey:indexColumn];
-                
-//                NSMutableDictionary *flexibleMapping = [NSMutableDictionary new];
-//                
-//                for (NSMutableDictionary *dict in currentEntries) {
-//                    if ([dict objectForKey:relationColumn] == nil) {
-//                        [dict setObject:[NSMutableDictionary new] forKey:relationColumn];
-//                    }
-//                    
-//                    id actuallValue = [dict objectForKey:relationColumn];
-//                    id newValue = [NSString stringWithFormat:@"%@ + %@",actuallValue,valueColumn];
-//                    
-//                    NSMutableDictionary *dictionaryRelationValue = [NSMutableDictionary dictionaryWithObject:newValue forKey:relationColumn];
-//                    
-//                    [flexibleMapping setObject:dictionaryOfRelations forKey:indexColumn];
-//
-//                }
                 float stringToFloat = [[valueColumn stringByReplacingOccurrencesOfString:@"," withString:@"."] floatValue];
 
                 id currentValueForRelation = [currentEntries objectForKey:relationColumn];
@@ -71,13 +52,36 @@ int main(int argc, const char * argv[]) {
             
             NSMutableDictionary *summedDictionary = [NSMutableDictionary new];
             
-            for (id newEntry in dictionaryOfRelations) {
-                for (id values in [dictionaryOfRelations objectForKey:newEntry]) {
+            int indexCount = (int)[dictionaryOfRelations.allKeys count];
+            
+            int i = 0;
+            
+            for (id key in dictionaryOfRelations) {
+                NSMutableDictionary *dictionaryOfValues = [dictionaryOfRelations objectForKey:key];
+                
+                for (id relation in dictionaryOfValues) {
+                    float value = [[dictionaryOfValues objectForKey:relation] floatValue];
                     
-                    NSLog(@"values - %@",values);
+                    if ([summedDictionary objectForKey:relation] == nil) {
+                        NSMutableArray *emptyArray = [NSMutableArray new];
+                        for (int j = 0; j <= indexCount-1; j++) {
+                            [emptyArray insertObject:[NSNull null] atIndex:j];
+                        }
+                        [summedDictionary setObject:emptyArray forKey:relation];
+                    }
+                    
+                    NSMutableArray *arrayOfValues = [summedDictionary objectForKey:relation];
+                    [arrayOfValues removeObjectAtIndex:i];
+                    [arrayOfValues insertObject:[NSDictionary dictionaryWithObject:@(value) forKey:@(i)] atIndex:i];
+
                 }
+                i++;
             }
-    
+            
+            
+            
+            
+            
         }
         
     return 0;
